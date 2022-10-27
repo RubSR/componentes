@@ -30,6 +30,16 @@ class AvatarPage extends StatelessWidget {
           )
         ],
       ),
+      body: const  Center(
+        //Hace una animacion de fundido y ademas nos deja poner un widget de tipo placeholer
+        child: FadeInImage(
+          image: NetworkImage('https://i.blogs.es/dac973/saitama/1024_2000.webp'),
+          fadeInDuration: Duration(seconds: 2),
+          fadeInCurve: Curves.fastLinearToSlowEaseIn,
+          placeholder: AssetImage('assets/carga.gif'),
+
+        ),
+      ),
     );
   }
 }
