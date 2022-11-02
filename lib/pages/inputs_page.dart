@@ -17,7 +17,14 @@ class _InputPageState extends State<InputPage> {
   String nombre = '';
   bool _ojo = true;
   TextEditingController _inputDateController =   TextEditingController();
+  List<String> _cosas = ['cosa1', 'cosa2', 'cosa3','cosa4','cosa5'];
+  String _opcionSeleccionada =  'cosa1';
 
+  //Variable para el checkbox
+  bool isChecked = false;
+
+  //Variables para radios
+  String  animal = '';
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +43,13 @@ class _InputPageState extends State<InputPage> {
            _passwordInput(),
           const SizedBox(height: 20),
           _datepickerInput(),
+          const SizedBox(height: 20),
+          _opcionesList(),
+          const SizedBox(height: 20),
+           _checkBox(),
+          const SizedBox(height: 20),
+          _radioButtons()
+
         ],
       )
 
@@ -146,4 +160,84 @@ class _InputPageState extends State<InputPage> {
       });
     }
   }
+
+ Widget _opcionesList() {
+    return DropdownButton(
+      value: _opcionSeleccionada,
+        //Para pasarle los elementos de mi lista desplegable
+        //en este caso los crearemos en un metodo aparte
+        items: getOpciones(),
+        //Para manejar mi logica cuando seleccione un de los elementos
+        onChanged:(value){
+        setState(() {
+          _opcionSeleccionada = value.toString();
+        });
+        }
+    );
+ }
+
+  List<DropdownMenuItem<String>> getOpciones() {
+    //En base a la lista de opciones vamos a devolcer un lista
+    // de DropdownMenuItem que son los elementos de un lista desplegable
+    List<DropdownMenuItem<String>> lista = [];
+
+    _cosas.forEach((cosa) {
+      lista.add(
+        DropdownMenuItem(
+          child: Text(cosa),
+          value: cosa,
+        )
+      );
+    });
+    return lista;
+  }
+
+  Widget _checkBox() {
+
+    return ListTile(
+      title: Text('Acepto los terminos '),
+      trailing: Checkbox(
+        value: isChecked,
+        onChanged: (bool? value){
+          setState(() {
+            isChecked = value!;
+          });
+        },
+      ),
+    );
+  }
+
+   Widget _radioButtons() {
+      return Column(
+        children: [
+          ListTile(
+            title: Text('gato'),
+            leading: Radio<String>(
+              value: 'gato',
+              groupValue: animal,
+              onChanged: (String? value){
+                setState(() {
+                  animal = value!;
+                });
+              },
+            ),
+          ),
+          ListTile(
+            title: Text('perro'),
+            leading: Radio<String>(
+              value: 'perro',
+              groupValue: animal,
+              onChanged: (String? value){
+                setState(() {
+                  animal = value!;
+                });
+              },
+            ),
+          ),
+
+        ],
+      );
+  }
 }
+
+
