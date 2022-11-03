@@ -21,10 +21,33 @@ class PersonajesPage extends StatelessWidget {
           //1. Comprobar si ya tenemos los datos o no
           if(snapshot.hasData){
             //Pintar la lista de personajes
-            return Text('Ya tengo datos');
+            List<Character> chars = snapshot.data!;
+            //Iterar esa lista y pintar un card por cada elemento
+            return ListView(
+              children: chars.map((Character char) =>
+              Card(
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                  children: [
+                    Image(image: NetworkImage(char.image ?? ''),
+                      //double.infinity es todo los que pueda dentro del contenedor
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    ListTile(
+                      title: Text(char.name!),
+                      subtitle: Text(char.location!.name!),
+                    )
+                  ],
+                ),
+              )
+              ).toList(),
+            ) ;
           }
           //Devolver un spinner o circular progress indicator
-          return Text('Aun no tengo datos', style: TextStyle(fontSize: 50), );
+          return  const Center(
+            child: CircularProgressIndicator() ,
+          );
         },
       )
     );

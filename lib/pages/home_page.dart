@@ -32,6 +32,16 @@ class HomePage extends StatelessWidget {
         'title': 'Personajes',
         'icon': const Icon(Icons.account_box),
         'ruta': 'personajes'
+      },
+      {
+        'title': 'Personaje',
+        'icon': const Icon(Icons.account_box),
+        'ruta': 'personaje'
+      },
+      {
+        'title': 'Pasar datos',
+        'icon': const Icon(Icons.account_box),
+        'ruta': 'page1'
       }
     ];
 
